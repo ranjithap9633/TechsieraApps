@@ -7,6 +7,7 @@
     "version": "16.0.1.0.1",
     "license": "LGPL-3",
     "depends": ["mail"],
+    "images":["static/description/banner.jpeg"],
     "data": [
         "security/ir.model.access.csv",
         "data/email_remainder.xml",
