@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_ts_session_attendance_tree" model="ir.ui.view">
+        <field name="name">ts.session.attendance.tree</field>
+        <field name="model">ts.session.attendance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="participant_id" />
+                <field name="event_id" />
+                <field name="session_id" />
+                <field name="attended" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_ts_session_attendance_form" model="ir.ui.view">
+        <field name="name">ts.session.attendance.form</field>
+        <field name="model">ts.session.attendance</field>
+        <field name="arch" type="xml">
+            <form readonly="1">
+                <sheet>
+                    <group>
+                        <field
+                            name="participant_id"
+                            domain="[('event_registration_id', '=', event_id)]"
+                            options="{'no_create': True}"
+                        />
+                        <field name="event_id" readonly="1" />
+                        <field name="session_id" readonly="1" />
+                        <field name="attended" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="action_save"
+                        string="Save"
+                        type="object"
+                        class="btn-primary"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_session_attendance" model="ir.actions.act_window">
+        <field name="name">Detailed Session Attendance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ts.session.attendance</field>
+        <field name="view_mode">tree</field>
+
+    </record>
+    <menuitem
+        id="menu_session_attendance"
+        name="Detailed Session Attendance"
+        parent="menu_event_management_root"
+        action="action_session_attendance"
+        sequence="14"
+    />
+
+</odoo>

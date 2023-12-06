@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_ts_event_creation_form" model="ir.ui.view">
+        <field name="name">ts.event.creation.form</field>
+        <field name="model">ts.event.creation</field>
+        <field name="arch" type="xml">
+            <form string="Event Form">
+                <header>
+                    <button
+                        id="button_confirm"
+                        name="action_confirm"
+                        string="confirm"
+                        class="btn-primary"
+                        type="object"
+                        attrs="{'invisible': [('status', '=', 'confirm')]}"
+                    />
+                    <field name="status" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Event Name" />
+                        <h1>
+                            <field
+                                class="text-break"
+                                name="name"
+                                required="1"
+                                placeholder="e.g. Odoo Internship"
+                                attrs="{'readonly': [('status', '=', 'confirm')]}"
+                            />
+                        </h1>
+                    </div>
+                    <div class="oe_title">
+                        <label for="ts_event_type_id" string="Event Type" />
+                        <field
+                            class="text-break"
+                            name="ts_event_type_id"
+                            placeholder="e.g. Conference"
+                            attrs="{'readonly': [('status', '=', 'confirm')]}"
+                            domain="[('active_id', '=', True)]"
+                            options="{'no_create': True}"
+                            required="1"
+                        />
+                    </div>
+                    <group>
+                        <group>
+                            <label for="date_begin" string="Date" />
+                            <div class="o_row">
+                                <field
+                                    name="date_begin"
+                                    widget="daterange"
+                                    nolabel="1"
+                                    class="oe_inline"
+                                    options="{'related_end_date': 'date_end'},"
+                                    attrs="{'readonly': [('status', '=', 'confirm')]}"
+                                />
+                                <i
+                                    class="fa fa-long-arrow-right mx-2"
+                                    aria-label="Arrow icon"
+                                    title="Arrow"
+                                />
+                                <field
+                                    name="date_end"
+                                    widget="daterange"
+                                    nolabel="1"
+                                    class="oe_inline"
+                                    options="{'related_start_date': 'date_begin'},"
+                                    attrs="{'readonly': [('status', '=', 'confirm')]}"
+                                />
+                            </div>
+                        </group>
+                    </group>
+                    <label for="date_tz" string="Time zone" />
+                    <field
+                        name="date_tz"
+                        attrs="{'readonly': [('status', '=', 'confirm')]}"
+                    />
+                    <group>
+                        <field
+                            name="location"
+                            attrs="{'readonly': [('status', '=', 'confirm')]}"
+                            required="1"
+                        />
+                        <field
+                            name="address"
+                            attrs="{'readonly': [('status', '=', 'confirm')]}"
+                            required="1"
+                        />
+                        <field
+                            name="district"
+                            attrs="{'readonly': [('status', '=', 'confirm')]}"
+                            required="1"
+                        />
+                        <field
+                            name="state_id"
+                            attrs="{'readonly': [('status', '=', 'confirm')]}"
+                            required="1"
+                        />
+                        <field
+                            name="country_id"
+                            attrs="{'readonly': [('status', '=', 'confirm')]}"
+                            required="1"
+                        />
+                    </group>
+                    <notebook>
+                        <page string="Sessions" name="Session name">
+                            <field name="session_ids" required="1">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="agenda" />
+                                    <field name="start" />
+                                    <field name="end" />
+                                </tree>
+
+                            </field>
+                        </page>
+                        <page string="Sponsors" name="Sponsor">
+                            <field name="sponsor_ids">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="phone" />
+                                    <field name="email" />
+                                    <field name="website" />
+<!--                                    <field name="linkedin" />-->
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name" />
+                                        <field name="phone" />
+                                        <field name="email" />
+                                        <field name="website" />
+<!--                                        <field name="linkedin" />-->
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Speakers" name="Speaker">
+                            <field name="speaker_ids">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="phone" />
+                                    <field name="email" />
+                                    <field name="website" />
+<!--                                    <field name="linkedin" />-->
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name" />
+                                        <field name="phone" />
+                                        <field name="email" />
+                                        <field name="website" />
+<!--                                        <field name="linkedin" />-->
+
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field
+                        name="message_ids"
+                        options="{'post_refresh': 'recipients'}"
+                    />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="view_ts_event_creation_tree" model="ir.ui.view">
+        <field name="name">ts.event.creation.tree</field>
+        <field name="model">ts.event.creation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="ts_event_type_id" />
+                <field name="date_tz" />
+                <field name="date_begin" />
+                <field name="date_end" />
+                <field name="location" />
+                <field name="district" />
+                <field name="state_id" />
+                <field name="country_id" />
+                <field name="participant_count" />
+                <button
+                    name="open_participant_details_wizard"
+                    string="Register Now"
+                    type="object"
+                    class="btn-primary"
+                />
+
+            </tree>
+        </field>
+    </record>
+    <record id="action_event_creation_management" model="ir.actions.act_window">
+        <field name="name">Event Creation and Registration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ts.event.creation</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+    <menuitem
+        id="menu_event_creation_management"
+        name="Event Creation and Registration"
+        parent="menu_event_management_root"
+        action="action_event_creation_management"
+        sequence="10"
+    />
+
+</odoo>

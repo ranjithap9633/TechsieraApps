@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_ts_participant_details_tree" model="ir.ui.view">
+        <field name="name">ts.participant.details.tree</field>
+        <field name="model">ts.participant.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="event_registration_id" />
+                <field name="institution" />
+                <field name="phone" />
+                <field name="email" />
+                <field name="address" />
+                <field name="district" />
+                <field name="state" />
+                <field name="country" />
+                <field name="registration_date" />
+
+            </tree>
+        </field>
+    </record>
+    <record id="view_ts_participant_details_form" model="ir.ui.view">
+        <field name="name">ts.participant.details.form</field>
+        <field name="model">ts.participant.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" placeholder="Full name" required="1" />
+                        <field name="institution" required="1" />
+                        <field
+                            name="phone"
+                            placeholder="e.g. +911234567890"
+                            required="1"
+                        />
+                        <field name="email" required="1" />
+                        <field name="address" required="1" />
+                        <field name="district" required="1" />
+                        <field name="state" required="1" />
+                        <field name="country" required="1" />
+                        <field name="registration_date" invisible="1" />
+                        <field name="qr_code_report" invisible="1" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="action_save"
+                        string="Save"
+                        type="object"
+                        class="btn-primary"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_participant_details" model="ir.actions.act_window">
+        <field name="name">Participant Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ts.participant.details</field>
+        <field name="view_mode">tree</field>
+
+    </record>
+    <menuitem
+        id="menu_participant_details"
+        name="Participant Details"
+        parent="menu_event_management_root"
+        action="action_participant_details"
+        sequence="11"
+    />
+
+</odoo>

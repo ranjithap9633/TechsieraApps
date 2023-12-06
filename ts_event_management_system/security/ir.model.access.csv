@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ts_event_type,ts.event.type,model_ts_event_type,base.group_user,1,1,1,1
+access_ts_event_creation,ts.event.type,model_ts_event_creation,base.group_user,1,1,1,1
+access_ts_participant_details,ts.participant.details,model_ts_participant_details,base.group_user,1,1,1,1
+access_ts_sponsor_management,ts.participant.details,model_ts_sponsor_management,base.group_user,1,1,1,1
+access_ts_speaker_management,ts.speaker.management,model_ts_speaker_management,base.group_user,1,1,1,1
+access_ts_event_session,ts.event.session,model_ts_event_session,base.group_user,1,1,1,1
+access_ts_session_attendance,ts.session.attendance,model_ts_session_attendance,base.group_user,1,1,1,1

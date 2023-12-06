@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_ts_event_type_form" model="ir.ui.view">
+        <field name="name">ts.event.type.form</field>
+        <field name="model">ts.event.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        id="button_confirm"
+                        name="action_confirm"
+                        string="Confirm"
+                        class="btn-primary"
+                        type="object"
+                        attrs="{'invisible': [('status', '=', 'confirm')]}"
+                        confirm="Are you sure you want to confirm this event type and create a new event?"
+                    />
+
+
+                    <button
+                        id="button_update"
+                        name="action_update"
+                        string="update"
+                        class="btn-primary"
+                        type="object"
+                        attrs="{'invisible': [('status', '=', 'draft')]}"
+                    />
+                    <field name="status" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="image" widget='image' />
+                        <field
+                            name="name"
+                            attrs="{'readonly': [('status', '=', 'confirm')]}"
+                        />
+                        <field
+                            name="describe"
+                            attrs="{'readonly': [('status', '=', 'confirm')]}"
+                        />
+                        <field
+                            name="active_id"
+                            attrs="{'readonly': [('status', '=', 'confirm')]}"
+                            widget="boolean_toggle"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_ts_event_type_tree" model="ir.ui.view">
+        <field name="name">ts.event.type.tree</field>
+        <field name="model">ts.event.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="truncated_description" />
+                <field name="active_id" widget="boolean_toggle" />
+
+
+            </tree>
+        </field>
+    </record>
+    <record id="ts_event_type_kanban" model="ir.ui.view">
+        <field name="name">ts.event.type.kanban</field>
+        <field name="model">ts.event.type</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard" create="0">
+                <field name="name" />
+                <field name="describe" />
+                <field name="id" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="col-md-12 oe_kanban_card">
+                            <div
+                                class="o_primary style_event_type col-md-12"
+                                style="padding-bottom: 4%;"
+                            >
+                                <div class="col-md-12">
+                                    <img
+                                        t-att-src="kanban_image('ts.event.type', 'image', record.id.raw_value)"
+                                        alt="Image"
+                                        style="width:100%; border-radius: 13px;height:150px;"
+                                    />
+                                </div>
+                                <div class="col-md-12">
+                                    <span
+                                        style="margin-top:  20%;margin-bottom:  2%;font-size: 18px;"
+                                    >
+<!--                                        <span-->
+<!--                                            class=" o_primary"-->
+<!--                                            style="float: left;margin-top:2px;"-->
+<!--                                        >-->
+<!--                                        </span>-->
+                                        <field name="name" />
+                                        <field name="active_id" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="action_event_type_master" model="ir.actions.act_window">
+        <field name="name">Event Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ts.event.type</field>
+        <field name="view_mode">tree,form,kanban</field>
+
+    </record>
+    <menuitem
+        id="menu_event_type_master"
+        name="Event Type"
+        parent="menu_event_management_root"
+        action="action_event_type_master"
+        sequence="9"
+    />
+
+</odoo>

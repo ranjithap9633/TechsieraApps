@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="ts_event_management_system.CustomInfoWidget">
+        <div class="o_info_icon">
+            <i class="fa fa-info-circle o-attendance-info" />
+        </div>
+        <div class="o_info_content" style="display: none;">
+            <!-- Add your custom rendering logic here -->
+        </div>
+    </t>
+</templates>

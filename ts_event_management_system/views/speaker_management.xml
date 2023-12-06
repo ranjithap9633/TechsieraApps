@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_ts_speaker_management_tree" model="ir.ui.view">
+        <field name="name">ts.speaker.management.tree</field>
+        <field name="model">ts.speaker.management</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="phone" />
+                <field name="email" />
+                <field name="website" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_ts_speaker_management_form" model="ir.ui.view">
+        <field name="name">ts.speaker.management.form</field>
+        <field name="model">ts.speaker.management</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="phone" />
+                            <field name="email" />
+                            <field name="website" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Events" name="Event Name">
+                            <field name="events_ids">
+                                <tree create="0">
+                                    <field name="name" />
+                                    <field name="ts_event_type_id" />
+                                    <field name="date_begin" />
+                                    <field name="date_end" />
+                                    <field name="address" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name" readonly="1" />
+                                        <field name="ts_event_type_id" readonly="1" />
+                                        <field name="date_begin" readonly="1" />
+                                        <field name="date_end" readonly="1" />
+                                        <field name="address" readonly="1" />
+                                    </group>
+                                    <footer>
+                                    </footer>
+                                </form>
+                            </field>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_speaker_management" model="ir.actions.act_window">
+        <field name="name">Speaker Management</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ts.speaker.management</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+    <menuitem
+        id="menu_speaker_management"
+        name="Speaker Management"
+        parent="menu_all_management"
+        action="action_speaker_management"
+        sequence="2"
+    />
+
+</odoo>
